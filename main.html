@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html ng-app="moduleOne">
+<head>
+	<link rel="stylesheet" type="text/css" href="normalize.css">
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.9/angular.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+	<script type="text/javascript" src="main.js"></script>
+	<title>Inspirational Quotes</title>
+</head>
+<body ng-controller="controllerOne">
+<h1>Inspirational Quotes</h1>
+<div>
+	<div ng-repeat='entry in quoteArray'>
+		<p>
+		<strong>Author</strong> <span>{{entry.author}}</span>
+		</p>
+		<p>
+		<strong>Quote</strong> <span>{{entry.quote}}</span>
+		</p>
+		<p>{{entry.rating}} out of 5 stars.</p>
+
+	</div>
+
+</div>
+
+<div>
+<h3>Enter New Quote!!!</h3>
+<form ng-submit='submit($event)'>
+	
+	<input type="text" placeholder="Author's Name" ng-model='post.author'>
+	<input type="text box" placeholder="quote" ng-model='post.quote'>
+	<input type="radio" name='rating' ng-value='1'ng-model='post.rating'>
+	<label>1</label>
+	<input type="radio" name='rating' ng-value='2'ng-model='post.rating'>
+	<label>2</label>
+	<input type="radio" name='rating' ng-value='3'ng-model='post.rating'>
+	<label>3</label>
+	<input type="radio" name='rating' ng-value='4'ng-model='post.rating'>
+	<label>4</label>
+	<input type="radio" name='rating' ng-value='5'ng-model='post.rating'>
+	<label>5</label>
+	<button type='submit'> Submit</button>
+</form>
+<button ng-click='undo()'>Remove Last Post</button>
+</div>
+
+
+
+
+
+
+
+</body>
+</html>
