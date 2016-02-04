@@ -9,10 +9,10 @@ angular.module('moduleOne')
 				return Math.floor(Math.random()*4)
 			}
 		
-		}
+		
 		var Post = function(author, quote){
-				this.author = author, 
-				this.quote = quote, 
+				this.author = author 
+				this.quote = quote 
 				this.rating = 0
 				this.ratingArray = []
 		}
@@ -22,7 +22,7 @@ angular.module('moduleOne')
 				sum += ratingArray[i]
 				var avg =  sum/ratingArray.length
 				return avg
-			}
+			}}
 		
 		$scope.update = function($index){
 			$scope.quoteArray[$index].ratingArray.push(radio)
@@ -30,7 +30,7 @@ angular.module('moduleOne')
 		}
 
 		$scope.submit = function($event){						
-			$scope.quoteArray.push(new Post(userPost.author, userPost.author))
+			$scope.quoteArray.push(new Post($scope.userPost.author, $scope.userPost.author))
 			$scope.quoteArray = _.sortBy($scope.array, 'rating')
 			
 			console.log($scope.quoteArray)
