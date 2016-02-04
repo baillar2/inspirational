@@ -11,7 +11,7 @@
 <body ng-controller="controllerOne">
 <h1>Inspirational Quotes</h1>
 <div>
-	<div ng-repeat='entry in quoteArray'>
+	<div ng-repeat='entry in quoteArray track by $index'>
 		<p>
 		<strong>Author</strong> <span>{{entry.author}}</span>
 		</p>
@@ -30,7 +30,7 @@
 			<label>4</label>
 			<input type="radio" name='rating' ng-value='5'ng-model='radio'>
 			<label>5</label>
-			<button type='submit' ng-click='update()'></button>
+			<button type='submit' ng-click='update($index)'>submit</button>
 		</form>
 	</div>
 
@@ -40,8 +40,8 @@
 <h3>Enter New Quote!!!</h3>
 <form ng-submit='submit($event)'>
 	
-	<input type="text" placeholder="Author's Name" ng-model='post.author'>
-	<input type="text box" placeholder="quote" ng-model='post.quote'>
+	<input type="text" placeholder="Author's Name" ng-model='userPost.author'>
+	<input type="text box" placeholder="quote" ng-model='userPost.quote'>
 	
 	<button type='submit'> Submit</button>
 </form>
