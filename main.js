@@ -2,9 +2,10 @@ angular.module('moduleOne', [])
 
 angular.module('moduleOne')
 	.controller('controllerOne', ['$scope', function($scope){
-		//$scope.array=[]
-		$scope.quoteArray = _.sortBy($scope.array, 'rating')
+		$scope.quoteArray=[]
+		//$scope.quoteArray = _.sortBy($scope.array, 'rating')
 		$scope.post= {}
+		$scope.radio = { num:0}
 		var randomNumber = function(){
 				return Math.floor(Math.random()*4)
 			}
@@ -18,28 +19,30 @@ angular.module('moduleOne')
 		}
 		Post.prototype.average = function(){
 			var sum = 0
-			for(var i=0; i < ratingArray.length; i++){
-				sum += ratingArray[i]
-				var avg =  sum/ratingArray.length
+			for(var i=0; i < this.ratingArray.length; i++){
+				sum += Number(this.ratingArray[i])
+				}
+				var avg =  sum/this.ratingArray.length
 				return avg
-			}}
 		
-		$scope.update = function($index){
-			$scope.quoteArray[$index].ratingArray.push(radio)
+		}
+
+		$scope.submitRating = function($index, entry){
+			$scope.quoteArray[$index].ratingArray.push(Number(entry.num))
 			$scope.quoteArray[$index].rating = $scope.quoteArray[$index].average()
+			//$scope.quoteArray = _.sortBy($scope.array, 'rating')
+			console.log($scope.radio.num)
 		}
 
-		$scope.submit = function($event){						
-			$scope.quoteArray.push(new Post($scope.userPost.author, $scope.userPost.author))
-			$scope.quoteArray = _.sortBy($scope.array, 'rating')
-			
-			console.log($scope.quoteArray)
-
+		$scope.submit = function(){						
+			$scope.quoteArray.push(new Post($scope.userPost.author, $scope.userPost.quote))
+			//$scope.quoteArray = _.sortBy($scope.quoteArray, 'rating')
+			$scope.userPost = {}
 		}
 
-		$scope.undo = function(){
-			$scope.quoteArray.pop()
-			$scope.quoteArray = _.sortBy($scope.array, 'rating')
+		$scope.undo = function($index){
+			$scope.quoteArray.pop($index)
+			//$scope.quoteArray = _.sortBy($scope.array, 'rating')
 		}
 
 		$scope.randomUp = function(){

@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html ng-app="moduleOne">
 <head>
-	<link rel="stylesheet" type="text/css" href="normalize.css">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.js
+"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="main.css">
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.9/angular.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
@@ -10,8 +12,9 @@
 </head>
 <body ng-controller="controllerOne">
 <h1>Inspirational Quotes</h1>
-<div>
-	<div ng-repeat='entry in quoteArray track by $index'>
+<div class="container">
+	<div class="row">
+	<div class="col-xs-12 col-sm-6" ng-repeat="entry in quoteArray | orderBy:'-rating'">
 		<p>
 		<strong>Author</strong> <span>{{entry.author}}</span>
 		</p>
@@ -20,32 +23,32 @@
 		</p>
 		<p>{{entry.rating}} out of 5 stars.</p>
 		<form>
-			<input type="radio" name='rating' ng-value='1'ng-model='radio'>
-			<label>1</label>
-			<input type="radio" name='rating' ng-value='2'ng-model='radio'>
+			<input type="radio" name='rating' ng-value='1' ng-model='entry.num'>
+			<label>1</label> 
+			<input type="radio" name='rating' ng-value='2' ng-model='entry.num'>
 			<label>2</label>
-			<input type="radio" name='rating' ng-value='3'ng-model='radio'>
+			<input type="radio" name='rating' ng-value='3' ng-model='entry.num'>
 			<label>3</label>
-			<input type="radio" name='rating' ng-value='4'ng-model='radio'>
+			<input type="radio" name='rating' ng-value='4' ng-model='entry.num'>
 			<label>4</label>
-			<input type="radio" name='rating' ng-value='5'ng-model='radio'>
+			<input type="radio" name='rating' ng-value='5' ng-model='entry.num'>
 			<label>5</label>
-			<button type='submit' ng-click='update($index)'>submit</button>
+			<button type='submit' ng-click='submitRating($index, entry)'>submit</button>
 		</form>
 	</div>
-
+	</div>
 </div>
 
 <div>
 <h3>Enter New Quote!!!</h3>
-<form ng-submit='submit($event)'>
+<form ng-submit='submit()'>
 	
 	<input type="text" placeholder="Author's Name" ng-model='userPost.author'>
 	<input type="text box" placeholder="quote" ng-model='userPost.quote'>
 	
 	<button type='submit'> Submit</button>
 </form>
-<button ng-click='undo()'>Remove Last Post</button>
+<button ng-click='undo($index)'>Remove Last Post</button>
 <button ng-click='randomUp()'>Random Quote</button>
 </div>
 <div ng-show='popUp'>
